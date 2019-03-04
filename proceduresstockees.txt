@@ -1,6 +1,6 @@
-Procédure stockée :
-Quand un utilisateur achète un produit, 
-il doit être bloqué à l'achat pour les visiteurs.
+Procdure stocke :
+Quand un utilisateur achte un produit, 
+il doit tre bloqu à l'achat pour les visiteurs.
 
-Quand les 24h de délai se sont écoulées ou que le vendeur a refusé l'achat, 
-l'offre de l'acheteur est supprimée et le produit n'est plus bloqué.
+Quand les 24h de dlai se sont coules ou que le vendeur a refus l'achat, 
+l'offre de l'acheteur est supprime et le produit n'est plus bloqu.
