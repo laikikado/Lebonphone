@@ -5,7 +5,6 @@
 <body>
 <?php
 
-include_once '../helper/functions.php';
 include '../helper/navbar.php';
 
 $id = $_SESSION['iduser'];
