@@ -1,5 +1,5 @@
-<html>
-<head>
+<html lang="fr">
+<head title="">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link href="../css/custom.css" rel="stylesheet">
     <link href="../css/mesventes.css" rel="stylesheet">
@@ -11,13 +11,8 @@
 <body>
 
 <?php
-
     include '../helper/navbar.php';
-
-    if(isset($_POST['achattel'])){
-        mescommandes($id);
-    }
-    ?>
+?>
 
 <h2 class="text-center card-header">Liste de vos offres en cours</h2>
 
@@ -40,7 +35,7 @@ for($i=0;$i<$count;$i++)
                         <li>Prix : <?=$ventes[$i]->prix;?></li>
                         <li>Numéro du vendeur : +33<?=$ventes[$i]->numero;?></li>
                         <li>Mail du vendeur : <?=$ventes[$i]->mail;?></li>
-                        <form action="../client/mescommandes.php" method="post">
+                        <form action="../telephone/deleteachat.php" method="post">
                             <input type="text" name="idprod" value="<?=$ventes[$i]->idprod;?>" hidden>
                             <input type="submit" name="annuler" class="btn btn-danger" value="Annuler l'offre">
                         </form>

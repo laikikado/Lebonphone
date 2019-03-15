@@ -59,7 +59,7 @@ for($i=0;$i<$countprod;$i++){ ?>
                 }
                 else
                 {
-                    echo '<form action="../telephone/deleteachat.php" method="post">
+                    echo '<form action="../telephone/achat.php" method="post">
                         <input type="submit" name="achattel" value="Acheter" class="btn btn-primary">
                     </form>';
 

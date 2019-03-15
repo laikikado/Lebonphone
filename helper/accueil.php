@@ -55,8 +55,8 @@
                 }
                 else
                     {
-                echo '<form action="../telephone/deleteachat.php" method="post">
-                        <input name="idprod" value="'. $accueil[$i]->idprod . '" hidden>
+                echo '<form action="../telephone/achat.php" method="post">
+                        <input name="idprod" value="' . $accueil[$i]->idprod . '" hidden>
                         <input type="submit" name="achattel" value="Acheter" class="btn btn-primary">
                     </form>';
 

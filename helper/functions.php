@@ -403,20 +403,6 @@ function updatecredits100($id)
     }
 }
 
-function mescommandes($id)
-{
-    if (isset($_POST['achattel'])) {
-
-        extract(array_map("htmlspecialchars", $_POST));
-        $query = "SELECT * FROM telephone WHERE iduser = :pid";
-        $bdd = getDatabase();
-        $stmt = $bdd->prepare($query);
-        $stmt->bindParam(':pid', $id);
-        $stmt->execute();
-        header('Location: ../client/mescommandes.php');
-    }
-}
-
 function credit($id)
 {
     $bdd = getDatabase();
@@ -732,50 +718,13 @@ function deleteprofiladmin(){
 
 function deleteachat(){
 
-    if(isset($_POST['achattel'])) {
-        $idprod = $_POST['achattel'];
-        $req = getDatabase()->prepare('DELETE FROM telephone WHERE idprod=:pid');
+    //if(isset($_POST['annuler'])) {
+        $idprod = $_POST['idprod'];
+        $req = getDatabase()->prepare('DELETE FROM achete WHERE idprod = :pid');
         $req->bindParam(":pid", $idprod);
         $req->execute();
         header("Location: ../client/mescommandes.php");
-    }
-}
-
-function deleteoffre(){
-
-    if(isset($_POST['iduser'])) {
-        $idoffre = $_POST['idoffre'];
-        $req = getDatabase()->prepare('DELETE FROM offre WHERE idoffre=:pid');
-        $req->bindParam(":pid", $idoffre);
-        $req->execute();
-        header("Location: ../client/mescommandes.php");
-    }
-}
-
-function admininfosoffre(){
-    $bdd = null;
-
-    if ($bdd == null) {
-        $bdd = getDataBase();
-    }
-    if ($bdd) {
-        $stmt = $bdd->prepare("SELECT * FROM offre o, telephone t, typetel ty, marque ma, utilisateur u WHERE t.idtype = ty.idtype AND t.idmarque = ma.idmarque AND t.iduser = u.iduser AND o.idprod = t.idprod");
-        if ($stmt->execute()) {
-            $phone = $stmt->fetchAll(PDO::FETCH_OBJ);
-            $stmt->closeCursor();
-        }
-    }
-    return $phone;
-}
-
-function admincountoffre(){
-
-    $bdd = getDataBase();
-    $stmt = $bdd->prepare("SELECT COUNT(*) as count FROM utilisateur U, offre O WHERE U.iduser = O.iduser");
-    $stmt->execute();
-    $count = $stmt->fetchAll(PDO::FETCH_OBJ);
-    $stmt->closeCursor();
-    return $count;
+    //}
 }
 
 function achete($idprod, $iduser){
@@ -784,7 +733,7 @@ function achete($idprod, $iduser){
     $insert = $bdd->prepare($stmt);
     $values = array('idprod' => $idprod, 'iduser' => $iduser);
     $insert->execute($values);
-    //header('Location: ../admin/listeprofils.php');
+    header("Location: ../client/mescommandes.php");
     return $bdd->lastInsertId();
 
 }

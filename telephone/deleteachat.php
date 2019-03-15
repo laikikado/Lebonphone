@@ -2,10 +2,6 @@
 
 include '../helper/functions.php';
 
-session_start();
-
-$idprod = postVar("idprod");
-$iduser = $_SESSION['iduser'];
-$id = achete($idprod, $iduser);
-
-var_dump($id);
+//if (isset($_POST["idprod"]) && !empty($_POST["idprod"])) {
+    deleteachat();
+//}
