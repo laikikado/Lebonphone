@@ -5,6 +5,9 @@
     <link rel="stylesheet" href="../css/custom.css">
 </head>
 
+<?php include '../helper/functions.php';
+?>
+
 <body>
 
 <a href="javascript:history.back()">

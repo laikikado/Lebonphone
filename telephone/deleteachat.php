@@ -2,4 +2,10 @@
 
 include '../helper/functions.php';
 
-deleteachat();
+session_start();
+
+$idprod = postVar("idprod");
+$iduser = $_SESSION['iduser'];
+$id = achete($idprod, $iduser);
+
+var_dump($id);

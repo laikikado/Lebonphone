@@ -54,7 +54,8 @@ function infosoffre($id){
         $bdd = getDataBase();
     }
     if ($bdd) {
-        $stmt = $bdd->prepare("SELECT * FROM offre o, telephone t, typetel ty, marque ma, utilisateur u WHERE o.idtype = ty.idtype AND o.idmarque = ma.idmarque AND o.iduser = u.iduser AND o.idprod = t.idprod AND u.iduser = :pid");
+        $stmt = $bdd->prepare("SELECT * FROM telephone t, typetel ty, marque ma, utilisateur u, achete a 
+WHERE u.iduser = :pid AND a.iduser = u.iduser AND t.idprod = a.idprod AND ma.idmarque = t.idmarque AND ty.idtype = t.idtype");
         $stmt->bindParam(':pid', $id);
         if ($stmt->execute()) {
             $phone = $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -142,10 +143,10 @@ function countprod($id){
     return $count;
 }
 
-function countoffre($id){
+function countachat($id){
 
     $bdd = getDataBase();
-    $stmt = $bdd->prepare("SELECT COUNT(*) as count FROM utilisateur U, offre O WHERE U.iduser = O.iduser AND O.iduser = :pid");
+    $stmt = $bdd->prepare("SELECT COUNT(*) as count FROM utilisateur U, achete A WHERE U.iduser = A.iduser AND A.iduser = :pid");
     $stmt->bindParam(':pid', $id);
     $stmt->execute();
     $count = $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -214,9 +215,7 @@ function addTelephone($idprod, $libelle, $prix, $etat, $description, $photo, $ta
     $values = array('libelle' => $libelle, 'prix' => $prix, 'etat' => $etat, 'description' => $description, 'photo' => $photo, 'tailleecran' => $tailleecran,
         'connectivite' => $connectivite, 'stockagememoire' => $stockagememoire, 'couleur' => $couleur, 'systemexploit' => $systemexploit, 'idtype' => $idtype,
         'iduser' => $iduser, 'idmarque' => $idmarque);
-$insert->execute($values);
-    //header('Location: ../helper/accueil.php');
-    var_dump($insert);
+    $insert->execute($values);
     return $db->lastInsertId();
 }
 
@@ -777,4 +776,15 @@ function admincountoffre(){
     $count = $stmt->fetchAll(PDO::FETCH_OBJ);
     $stmt->closeCursor();
     return $count;
+}
+
+function achete($idprod, $iduser){
+    $bdd = getDatabase();
+    $stmt = 'INSERT INTO achete (idprod, iduser) VALUES(:idprod, :iduser)';
+    $insert = $bdd->prepare($stmt);
+    $values = array('idprod' => $idprod, 'iduser' => $iduser);
+    $insert->execute($values);
+    //header('Location: ../admin/listeprofils.php');
+    return $bdd->lastInsertId();
+
 }

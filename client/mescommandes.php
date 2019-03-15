@@ -26,7 +26,7 @@
 returnUtilisateur($id);
 $ventes = infosoffre($id);
 
-$count = (int)countoffre($id)[0]->count;
+$count = (int)countachat($id)[0]->count;
 
 for($i=0;$i<$count;$i++)
 {   ?>
@@ -40,8 +40,7 @@ for($i=0;$i<$count;$i++)
                         <li>Prix : <?=$ventes[$i]->prix;?></li>
                         <li>Numéro du vendeur : +33<?=$ventes[$i]->numero;?></li>
                         <li>Mail du vendeur : <?=$ventes[$i]->mail;?></li>
-
-                        <form action="../telephone/edittelephone.php" method="post">
+                        <form action="../client/mescommandes.php" method="post">
                             <input type="text" name="idprod" value="<?=$ventes[$i]->idprod;?>" hidden>
                             <input type="submit" name="annuler" class="btn btn-danger" value="Annuler l'offre">
                         </form>
