@@ -1,3 +1,7 @@
+<head>
+    <title>Erreur de connexion</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
 <?php
 
 include '../helper/functions.php';
@@ -24,7 +28,15 @@ include '../helper/LoginController.php';
     else
         {
         if (!$resultat) {
-            echo 'Mauvais identifiant ou mot de passe !';
+            echo '
+                <div class="container" style="margin-top: 15%">
+                    <div class="jumbotron">
+                        <div class="text-center"><i class="fa fa-5x fa-frown-o" style="color:#d9534f;"></i></div>
+                        <h2 class="text-center">Erreur de connexion</h2>
+                        <p class="text-center">Mauvais identifiant ou mot de passe ! !</p><br>
+                        <p class="text-center"><a class="btn btn-primary" style="border-color: #56baed" href="javascript:history.back()"><i class="fa fa-home"></i> Revenir à la page de connexion</a></p>
+                    </div>
+                </div>';
         } else
             {
             if ($isPasswordCorrect) {
@@ -36,7 +48,15 @@ include '../helper/LoginController.php';
             }
             else
                 {
-            echo 'Mauvaise adresse mail ou mot de passe !';
+            echo '
+                <div class="container" style="margin-top: 15%">
+                    <div class="jumbotron">
+                        <div class="text-center"><i class="fa fa-5x fa-frown-o" style="color:#d9534f;"></i></div>
+                        <h2 class="text-center">Erreur de connexion</h2>
+                        <p class="text-center">Mauvaise adresse mail ou mot de passe !</p><br>
+                        <p class="text-center"><a class="btn btn-primary" style="border-color: #56baed" href="javascript:history.back()"><i class="fa fa-home"></i> Revenir à la page de connexion</a></p>
+                    </div>
+                </div>';
         }
     }
 }
