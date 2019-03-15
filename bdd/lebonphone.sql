@@ -1,22 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 16 nov. 2018 à 08:49
--- Version du serveur :  5.7.23
--- Version de PHP :  7.2.10
+-- Hôte : localhost:8889
+-- Généré le :  ven. 15 mars 2019 à 13:05
+-- Version du serveur :  5.7.25
+-- Version de PHP :  7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de données :  `lebonphone`
@@ -28,12 +20,9 @@ SET time_zone = "+00:00";
 -- Structure de la table `achete`
 --
 
-DROP TABLE IF EXISTS `achete`;
-CREATE TABLE IF NOT EXISTS `achete` (
+CREATE TABLE `achete` (
   `idprod` int(11) NOT NULL,
-  `iduser` int(11) NOT NULL,
-  PRIMARY KEY (`idprod`,`iduser`),
-  KEY `Achete_Utilisateur0_FK` (`iduser`)
+  `iduser` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -42,12 +31,10 @@ CREATE TABLE IF NOT EXISTS `achete` (
 -- Structure de la table `marque`
 --
 
-DROP TABLE IF EXISTS `marque`;
-CREATE TABLE IF NOT EXISTS `marque` (
-  `idmarque` int(11) NOT NULL AUTO_INCREMENT,
-  `nommarque` varchar(20) NOT NULL,
-  PRIMARY KEY (`idmarque`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+CREATE TABLE `marque` (
+  `idmarque` int(11) NOT NULL,
+  `nommarque` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `marque`
@@ -71,9 +58,8 @@ INSERT INTO `marque` (`idmarque`, `nommarque`) VALUES
 -- Structure de la table `offre`
 --
 
-DROP TABLE IF EXISTS `offre`;
-CREATE TABLE IF NOT EXISTS `offre` (
-  `idoffre` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `offre` (
+  `idoffre` int(11) NOT NULL,
   `idprod` int(11) NOT NULL,
   `libelle` varchar(100) NOT NULL,
   `prix` int(11) NOT NULL,
@@ -87,13 +73,8 @@ CREATE TABLE IF NOT EXISTS `offre` (
   `systemexploit` varchar(20) NOT NULL,
   `idtype` int(11) NOT NULL,
   `iduser` int(11) NOT NULL,
-  `idmarque` int(11) NOT NULL,
-  PRIMARY KEY (`idoffre`),
-  KEY `telephone` (`idprod`),
-  KEY `utilisateur` (`iduser`),
-  KEY `marque` (`idmarque`),
-  KEY `type` (`idtype`)
-) ENGINE=MyISAM AUTO_INCREMENT=196 DEFAULT CHARSET=latin1;
+  `idmarque` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `offre`
@@ -108,9 +89,8 @@ INSERT INTO `offre` (`idoffre`, `idprod`, `libelle`, `prix`, `etat`, `descriptio
 -- Structure de la table `telephone`
 --
 
-DROP TABLE IF EXISTS `telephone`;
-CREATE TABLE IF NOT EXISTS `telephone` (
-  `idprod` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `telephone` (
+  `idprod` int(11) NOT NULL,
   `libelle` varchar(100) NOT NULL,
   `prix` int(11) NOT NULL,
   `etat` varchar(50) NOT NULL,
@@ -121,89 +101,85 @@ CREATE TABLE IF NOT EXISTS `telephone` (
   `stockagememoire` varchar(30) NOT NULL,
   `couleur` varchar(20) NOT NULL,
   `systemexploit` varchar(20) NOT NULL,
+  `dispo` tinyint(1) NOT NULL,
   `idtype` int(11) NOT NULL,
   `iduser` int(11) NOT NULL,
-  `idmarque` int(11) NOT NULL,
-  PRIMARY KEY (`idprod`),
-  KEY `Telephone_Type_FK` (`idtype`),
-  KEY `Telephone_Utilisateur0_FK` (`iduser`),
-  KEY `Telephone_Marque1_FK` (`idmarque`)
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=latin1;
+  `idmarque` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `telephone`
 --
 
-INSERT INTO `telephone` (`idprod`, `libelle`, `prix`, `etat`, `description`, `photo`, `tailleecran`, `connectivite`, `stockagememoire`, `couleur`, `systemexploit`, `idtype`, `iduser`, `idmarque`) VALUES
-(1, 'S7 edge', 200, 'Très bon', 'S7 Edge 32go état neuf. Garantie Mars 2019. Aucunes rayures, batterie neuve.\r\n', '', '5', 'Oui', '32Go', 'Or', 'Android', 2, 1, 2),
-(7, 'iPhone 7', 450, 'Bon', 'Débloquer tout opérateur. \r\nLe téléphone est vendu avec sa boîte d\'origine ainsi que son chargeur et ses écouteurs. \r\nVitre en verre trempée fissurée mais écran tactile en très bon état. ', '1', '5', 'Oui', '32Go', 'Rouge', 'iOS', 1, 1, 1),
-(8, 'J3 Pro', 170, 'Neuf', 'Samsung j3 pro 2017 16 giga tout neuf jamais utilisé', NULL, '4,8', 'Oui', '16Go', 'Or', 'Android', 1, 3, 2),
-(9, 'Ace', 55, 'Très bon', 'Bonjour je vends un samsung Galaxy ace \r\nTrès bon état \r\nAvec la boîte et ses accessoires', NULL, '3,8', 'Non', '4Go', 'Noir', 'Android', 1, 8, 2),
-(10, 'GT-1190', 30, 'Très bon', 'Samsung GT-1190 en excellent état comme neuf, débloquer tout opérateur vendu avec son chargeur ', NULL, '3 ou moins', 'Non', '2Go et moins', 'Noir', 'Autre', 3, 9, 2),
-(11, 'S9 Plus', 600, 'Neuf', 'comme neuf avec tous ses accessoires et la boîte d origine.', NULL, '6', 'Oui', '32Go', 'Violet', 'Android', 1, 10, 2),
-(12, 'A3', 50, 'Hors Service', 'Pour pièce ou réparer. L\'écran reste noir mes les touches du bas s\'allume.', NULL, '4,7', 'Oui', '16Go', 'Noir', 'Android', 1, 11, 2),
-(13, 'Note 3', 140, 'Bon', 'Samsung note 3 blanc 16 go avec son stylet chargeur écouteur ', NULL, '5,2', 'Oui', '32Go', 'Blanc', 'Android', 1, 12, 2),
-(14, 'A5 2016', 140, 'Très bon', 'Tout opérateurs débloqué. Vendu avec boite, chargeur, cable, écouteurs..', NULL, '4,7', 'Oui', '16Go', 'Or', 'Android', 1, 13, 2),
-(15, 'Gold 4G', 180, 'Très bon', 'Complet avec tout ses accessoires + facture et garantie.', NULL, '4,5', 'Oui', '16Go', 'Or', 'Android', 1, 14, 2),
-(16, 'iPhone 6', 210, 'Très bon', 'Etat irréprochable, Batterie neuve !', NULL, '5', 'Oui', '64Go', 'Gris Sidéral', 'iOS', 1, 3, 1),
-(17, 'iPhone 7', 450, 'Très bon', 'Débloqué acheté à Apple, facture à l\'appuie \r\nComprenant : écouteurs, chargeurs, adaptateur écouteurs, et coque transparente', NULL, '5', 'Oui', '128Go', 'Blanc', 'iOS', 1, 9, 1),
-(18, 'iPhone 6S Plus', 270, 'Très bon', 'Je vends mon iPhone 6s Plus 16 giga car j\'en ai acheté un nouveau. Je n\'en ai plus l\'utilité.\r\nLe téléphone est dans un état irréprochable. Avec sa boîte ses écouteurs et son chargeur. \r\nL\'iPhone n\'est plus garantie Apple , car le téléphone vient de dépasser ses 1 ans.', NULL, '5', 'Oui', '16Go', 'Or', 'iOS', 1, 11, 1),
-(19, 'iPhone 8', 540, 'Neuf', 'IPhone 8 64 gb couleur or debloqué garanti 2 ans sous blister.\r\n\r\nPossibilité de le faire verifier par Apple lors de la transaction (Accepte tout autre démarche de vérification)', NULL, '5', 'Oui', '64Go', 'Or', 'iOS', 1, 13, 1),
-(20, 'iPhone X', 750, 'Très bon', 'Vends iPhone X état neuf, débloque tout opérateur.\r\nChangé en garantie par Apple il y a 2 mois à peine.\r\nIl est vendu avec accessoires et boîte, et certificat de cession.', NULL, '6,4', 'Oui', '64Go', 'Gris Sidéral', 'iOS', 1, 13, 1),
-(21, 'Max Plus M1', 120, 'Très bon', 'vends telephone smartphone dans un état quasi neuf dans sa boîte d\'origine.\r\ndébloqué tout opérateur.', NULL, '4,5', 'Oui', '32Go', 'Or', 'Android', 1, 8, 3),
-(22, '2', 40, 'Hors Service', 'Écran HS.\r\nAppareil photo HS.\r\nDébloqué tout opérateur', NULL, '4,5', 'Oui', '32Go', 'Noir', 'Android', 1, 11, 3),
-(23, 'Selfie', 70, 'Bon', 'Vend mon Asus Zenfone Selfie, très bon état, vitre protégée par film transparent.', NULL, '4,2', 'Oui', '16Go', 'Blanc', 'Android', 1, 2, 3),
-(24, '4 Max', 130, 'Neuf', ' parfait état. Il as servi 1 mois (29/09/2018) et Encore sous garantie Fnac prix magasin (179Euro(s))', NULL, '4,9', 'Oui', '32Go', 'Or', 'Android', 1, 9, 3),
-(25, '5', 270, 'Très bon', 'vente mon Asus ZenFone 5.\r\nle téléphone a 3 mois comme vous verrez sur la facture.', NULL, '6,2', 'Oui', '64Go', 'Noir', 'Android', 1, 11, 3),
-(26, '2', 80, 'Bon', 'Je vends un Asus zenfone en bon état\r\nAttention un câble pour les données mobiles à été sectionné du coup pour aller sur internet cela ne sera possible qu\'avec le wifi.', NULL, '4,5', 'Oui', '32Go', 'Noir', 'Android', 1, 14, 3),
-(27, 'Lumia 640', 70, 'Très bon', 'Etat comme neuf débloqué a tout la mémoire 16go , vendu seule avec la boîte.', NULL, '5', 'Oui', '16Go', 'Bleu', 'Windows Mobile', 1, 12, 4),
-(28, 'C6', 30, 'Bon', 'Nokia C6-00 noir, avec clavier escamotable qwerty. Avec chargeur secteur.\r\nS\'allume et se charge correctement, accès au menu, appareil photo, etc...\r\nIl est SIMLOCKé (affiche \'Carte SIM non valide).', NULL, '3,1', 'Non', '8Go', 'Noir', 'Autre', 2, 2, 4),
-(29, '6700 Slide', 50, 'Très bon', 'Je vends mon Nokia 6700 slide coulissant débloqué tout opérateurs et vendu avec le chargeur.', NULL, '2,6', 'Non', '2Go ou moins', 'Gris', 'Autre', 4, 11, 4),
-(30, '6700s', 50, 'Bon', 'En bon état, débloqué opérateur', NULL, '3 ou moins', 'Non', '2Go ou moins', 'Gris', 'Aucun', 4, 8, 4),
-(31, '6100', 15, 'Médiocre', 'Le boîtier fonctionne. \r\nLe clavier est bien effacé mais un utilisateur qui connaît les touches par coeur saura l\'utiliser. \r\nBloqué Orange. \r\nFourni avec écouteurs (jamais utilisé), chargeur d\'origine fonctionnel, notice et boîte d\'origine ', NULL, '3 ou moins', 'Non', '2Go ou moins', 'Gris', 'Aucun', 5, 9, 4),
-(32, 'Lumia 520', 60, 'Très bon', 'Vends Nokia Lumia 520 bleu en bon état de couleur bleu', NULL, '3,8', 'Non', '8Go', 'Bleu', 'Windows Mobile', 1, 3, 4),
-(33, 'Z30', 100, 'Bon', 'Blackberry Z30 16go Blanc en très bon état débloqué tt opérateur sans aucunes rayures ni chocs . On peut inséré une carte micro SD Ou SDHC jusqu\'à 64go. Une oreillette bluetooth Blackberry est offerte avec.', NULL, '3,2', 'Non', '16Go', 'Blanc', 'Blackberry OS', 1, 13, 5),
-(34, 'Porsche Design P9983', 295, 'Très bon', 'vends blackberry porsche design p\'9983 débloqué tout opérateur clavier azerty vendu avec le chargeur compatible. Produit original Blackberry c\'est pas une contrefaçon', NULL, '3,8', 'Non', '8Go', 'Noir (finition cuir)', 'Blackberry OS', 5, 12, 5),
-(35, 'Q5', 50, 'Très bon', 'Tres bon etat , peu utiliser', NULL, '3,8', 'Non', '8Go', 'Noir', 'Blackberry OS', 5, 11, 5),
-(36, 'Bold 9790', 65, 'Neuf', 'Vends mon BlackBerry Bold 9790 neuf. \r\nJe ne m\'en suis jamais servi, il est donc dans un état irréprochable et fonctionne parfaitement. \r\nFourni dans la boîte d\'origine avec chargeur, câble USB, écouteurs, notices et carte micro SD 8Go. ', NULL, '3,8', 'Non', '8Go', 'Noir', 'Blackberry OS', 5, 1, 5),
-(37, 'Torch 9800', 65, 'Très bon', 'Vends mon blackberry torch 9800 très bon état débloqué tout opérateur vendu avec le chargeur compatible', NULL, '3,8', 'Non', '8Go', 'Noir', 'Blackberry OD', 5, 8, 5),
-(38, 'KeyOne', 250, 'Neuf', 'Blackberry keyone\r\n32go extensible via micro sd\r\nDébloquer\r\nFacture et garantie 11/2019\r\nDans sa boîte avec tous les accessoires\r\nÉtat excellent', NULL, '5', 'Oui', '32Go', 'Noir Mat', 'Android', 1, 11, 5),
-(39, 'Black', 100, 'Très bon', 'Sony xperia Black 64Giga, débloqué et état neuf, WiFi, GPS, applications android...\r\nComplet avec tout ses accessoires\r\nexcellent smartphone.', NULL, '4,6', 'Oui', '64Go', 'Noir', 'Android', 1, 10, 6),
-(40, 'Z5 Compact', 150, 'Bon', 'Sony xperia Z5 compact 4G+ 128Giga (grosse capacité) 23 Mégapixels, débloqué, très bon état juste petite fissures non gênante sur la coque arrière (elle vaut 2,30Euro(s) sur le net). \r\nWiFi, GPS, applications, grand écran, processeur puissant...\r\navec tout ses accessoires.', NULL, '5,5', 'Oui', '128Go', 'Noir', 'Android', 1, 13, 6),
-(41, 'XZ', 120, 'Très bon', 'très bon état il marche très très bien aucun problème , débloquer a tout opérateur ,la mémoire 32 go, vendu seul.', NULL, '5', 'Oui', '32Go', 'argent', 'Android', 1, 8, 6),
-(42, 'Z1 Compact', 90, 'Bon', 'Sony z1 compact débloqué, mieux qu\'un iPhone!\r\nSlot micro SD\r\nProcesseur quadri coeur 2,2ghz\r\n16go de stockage\r\nAppareil photo 20,7 mega pixels...\r\nBatterie neuve\r\nÉcran nickel toujours protégé par une vitre en verre trempé\r\nVendue avec 2 coques\r\nJuste quelques traces sur l\'arrière et les coins', NULL, '5,3', 'Oui', '32Go', 'Noir', 'Android', 1, 9, 6),
-(43, 'M', 45, 'Très bon', 'Sony Xperia M très bon état, fonctionne parfaitement \r\nUtilisé moins d\'un an ', NULL, '4,2', 'Oui', '16Go', 'Noir', 'Android', 1, 3, 6),
-(44, 'Z3 Compact', 80, 'Hors Service', 'Vends smartphone Sony Xperia Z3 compact. \r\nLe connecteur de charge est hs, il ne peut donc pas être chargé.', NULL, '4', 'Oui', '16Go', 'Blanc', 'Android', 1, 12, 6),
-(45, 'Tommy 3', 80, 'Neuf', 'Téléphone Smartphone 5,5 pouces Wiko Tommy 3 NEUF + Facture + Garantie jusqu\'au 10/10/2020 !', NULL, '5,5', 'Oui', '16Go', 'Noir', 'Android', 1, 1, 7),
-(46, 'Rainbow Lite 4G', 50, 'Très bon', 'Double Sim\r\n4G\r\nTient bien la charge\r\nDébloquer\r\nAndroid 5.1.1', NULL, '5,2', 'Oui', '16Go', 'Noir', 'Android', 1, 14, 7),
-(47, 'Wax 4G', 50, 'Bon', 'Fourni avec cable d\'alimentation chargeur, cable écouteur, housse en cuir un peu élimée plus coque du dos en parfait état avec sa batterie d\'origine\r\nCe modèle possède un bon appareil photo pour des prises de vues de bonnes qualité, très pratique pour accéder aux diverses applications\r\n', NULL, '4,8', 'Oui', '8Go', 'Noir', 'Android', 1, 2, 7),
-(48, 'Selfie Originial', 110, '', 'wiko selfi original neuf avec sa boîte et ses accessoires. ', NULL, '4,6', 'Non', '8Go', 'Noir', 'Android', 1, 12, 7),
-(49, 'Goa', 75, 'Neuf', 'vend super wiko goa neuf jamais ouvert. cadeau mais achat en double.', NULL, '5', 'Oui', '16Go', 'Noir', 'Android', 1, 3, 7),
-(50, 'Sunny', 30, 'Très bon', 'Wiko Sunny blanc en bon état vendu avec une coque de protection blanche', NULL, '4,2', 'Non', '8Go', 'Blanc', 'Android', 1, 11, 7),
-(51, 'KM500', 30, 'Bon', 'mobile LG KM500 débloqué. Fournit avec boite et chargeur.', NULL, '3 ou moins', 'Non', '2Go ou moind', 'Gris', 'Autre', 4, 13, 8),
-(52, 'G2', 100, 'Très bon', 'smartphone en très bon état, fonctionne parfaitement.', NULL, '4,6', 'Oui', '16Go', 'Noir', 'Android', 1, 10, 8),
-(53, 'G4 Edition Cuir', 210, 'Très bon', 'LG G4 CUIR CAMEL\r\nDesign unique\r\n32 GO de mémoire, ecran ultra haute définition lumineux 5,5\' bordeless, Photo 16M de pixels. avec HDR auto, mode manuel avec tous les réglages , objectif f: 1.8..selfis 8M de pixels\r\nvendu avec tous les accessoires sur photos + un câble slimport', NULL, '5,5', 'Oui', '32Go', 'Cuir Camel', 'Android', 1, 9, 8),
-(54, '250', 10, 'Bon', 'Bon etat de fonctionnement et esthetique.\r\nDesimlocké tout opérateur.\r\nVendu avec son chargeur.', NULL, '3 ou moins', 'Non', '2Go ou moins', 'Noir', 'Autre', 3, 8, 8),
-(55, 'G3', 70, 'Bon', 'Aucune rayure sur l\'écran et la coque.\r\nProblème de scintillement de temps en temps de l\'écran.', NULL, '4,2', 'Oui', '16Go', 'Noir', 'Android', 1, 3, 8),
-(56, 'G3', 40, 'Hors Service', 'Au bout de quelques minutes le telephone scintille et s\'eteint, je pense a un probleme de carte mere.\r\nSinon il est en tres bon état, pas la moindre rayure, la batterie tient tres bien la charge.\r\nJe le vend donc dans l\'etat, avec une deuxieme housse-coque de protection neuve (photo 2),boite d\'origine, pas de chargeur\r\n', NULL, '4,2', 'Oui', '16Go', 'Noir', 'Android', 1, 11, 8),
-(57, 'Y6 2018', 135, 'Très bon', 'Très bon portable en très bon état, vendu avec sa boîte d\'origine ses écouteurs et son chargeur', NULL, '5,2', 'Oui', '16Go', 'Noir', 'Android', 1, 1, 9),
-(58, 'P20 Pro', 600, 'Très bon', 'Huawei p20 pro en parfait état. Acheter en mi juillet 2018 à Bouygues. Je vend le téléphone avec sa boîte et ses accessoires d\'origines. Aucun problème ni fissures. ', NULL, '6', 'Oui', '64Go', 'Noir', 'Android', 1, 14, 9),
-(59, ' G620S', 65, 'Neuf', 'Vends téléphone Huawei G620S en parfait état, comme neuf, débloqué tout opérateur.\r\nAucune rayure, tel protégé par une coque et écran protégé par un film verre trempé.\r\nAvec boite d\'origine + écouteurs + chargeur avec câble microUSB + coque de protection.', NULL, '5', 'Oui', '32Go', 'Noir', 'Android', 1, 2, 9),
-(60, 'Y7 2018', 110, 'Neuf', 'Acheté en septembre 2018 donc neuf, housse et écran de protection offerts', NULL, '5,5', 'Oui', '16Go', 'Noir', 'Android', 1, 12, 9),
-(61, 'P8 Lite 2018', 115, 'Très bon', 'Désimlocké \r\nSuper état comme neuf aucune rayure \r\nTrès peu servi \r\nToujours utilisé avec protection d\'écran et coque', NULL, '5,2', 'Oui', '16Go', 'Noir', 'Android', 1, 11, 9),
-(63, 'Map 10 Lite', 200, 'Neuf', 'Vend ou échange huawei mate 10lite comme neuf', NULL, '4,8', 'Oui', '16Go', 'Rose', 'Android', 1, 9, 9),
-(64, 'OnePlus 6', 480, 'Neuf', 'Je vends mon Oneplus 6.\r\nEtat neuf.\r\nAcheté début juillet 2018 sur le site Amazon.\r\nColoris \"Mirror Black\".\r\nVersion 8GO de RAM et 128GO de ROM (mémoire).\r\nVendu dans sa boîte complète.', NULL, '6', 'Oui', '128Go', 'Noir Mirroir', 'Android', 1, 13, 10),
-(65, 'OnePlus 5', 250, 'Bon', 'Oneplus 5 64 go bon état. \r\nvendu avec une coque Spigen.', NULL, '5,8', 'Oui', '64Go', 'Noir', 'Android', 1, 11, 10),
-(66, 'Honor 7', 100, 'Bon', 'vend mon honor 7 en assez bonne état car j\'ai changer de telephone. Avec facture', NULL, '5', 'Oui', '32Go', 'Or', 'Android', 1, 14, 10),
-(67, 'Honor 8 lite', 95, 'Très bon', 'SMARTPHONE HONOR 8 Lite couleur blanc, avec une coque à rabat\r\nAcheté le 23.03.2018 (facture)\r\nLe tout en Excellent état , boite et accessoires d\'origine.', NULL, '5,2', 'Oui', '32Go', 'Blanc', 'Android', 1, 13, 10),
-(68, 'Gigaset GS100', 100, 'neuf', 'Téléphone neuf sous blister gagné lors d\'un challenge commercial\r\nGigaset GS100 bleu cobalt 8GB Dual sim (nano-sim, micro-sim) emplacement carte SD', NULL, '5', 'Oui', '8go', 'Bleu Cobalt', 'Android', 1, 3, 10),
-(69, 'Lenovo ZUK Z2', 190, 'Très bon', 'Marque : Lenovo\r\nModèle: ZUK Z2\r\nSystème d\'exploitation:Android 8.0\r\nCPU:Qualcomm Snapdragon 820 64bit Quad Core\r\nGPU:Adreno 530\r\nVitesse du Processeur (max): 2.15GHz\r\nMémoire: ROM 64Go + RAM 4Go', NULL, '5', 'Oui', '64Go', 'Blanc', 'Android', 1, 12, 10),
-(70, 'S8', 330, 'Très bon', 'Toujours protégé vendu avec boîte et accessoires, il est débloqué opérateur.', NULL, '5,1', 'Oui', '32Go', 'Noir', 'Android', 1, 2, 2);
+INSERT INTO `telephone` (`idprod`, `libelle`, `prix`, `etat`, `description`, `photo`, `tailleecran`, `connectivite`, `stockagememoire`, `couleur`, `systemexploit`, `dispo`, `idtype`, `iduser`, `idmarque`) VALUES
+(1, 'S7 edge', 200, 'Très bon', 'S7 Edge 32go état neuf. Garantie Mars 2019. Aucunes rayures, batterie neuve.\r\n', '', '5', 'Oui', '32Go', 'Or', 'Android', 0, 2, 1, 2),
+(7, 'iPhone 7', 450, 'Bon', 'Débloquer tout opérateur. \r\nLe téléphone est vendu avec sa boîte d\'origine ainsi que son chargeur et ses écouteurs. \r\nVitre en verre trempée fissurée mais écran tactile en très bon état. ', '1', '5', 'Oui', '32Go', 'Rouge', 'iOS', 0, 1, 1, 1),
+(8, 'J3 Pro', 170, 'Neuf', 'Samsung j3 pro 2017 16 giga tout neuf jamais utilisé', NULL, '4,8', 'Oui', '16Go', 'Or', 'Android', 1, 1, 3, 2),
+(9, 'Ace', 55, 'Très bon', 'Bonjour je vends un samsung Galaxy ace \r\nTrès bon état \r\nAvec la boîte et ses accessoires', NULL, '3,8', 'Non', '4Go', 'Noir', 'Android', 0, 1, 8, 2),
+(10, 'GT-1190', 30, 'Très bon', 'Samsung GT-1190 en excellent état comme neuf, débloquer tout opérateur vendu avec son chargeur ', NULL, '3 ou moins', 'Non', '2Go et moins', 'Noir', 'Autre', 0, 3, 9, 2),
+(11, 'S9 Plus', 600, 'Neuf', 'comme neuf avec tous ses accessoires et la boîte d origine.', NULL, '6', 'Oui', '32Go', 'Violet', 'Android', 0, 1, 10, 2),
+(12, 'A3', 50, 'Hors Service', 'Pour pièce ou réparer. L\'écran reste noir mes les touches du bas s\'allume.', NULL, '4,7', 'Oui', '16Go', 'Noir', 'Android', 0, 1, 11, 2),
+(13, 'Note 3', 140, 'Bon', 'Samsung note 3 blanc 16 go avec son stylet chargeur écouteur ', NULL, '5,2', 'Oui', '32Go', 'Blanc', 'Android', 0, 1, 12, 2),
+(14, 'A5 2016', 140, 'Très bon', 'Tout opérateurs débloqué. Vendu avec boite, chargeur, cable, écouteurs..', NULL, '4,7', 'Oui', '16Go', 'Or', 'Android', 0, 1, 13, 2),
+(15, 'Gold 4G', 180, 'Très bon', 'Complet avec tout ses accessoires + facture et garantie.', NULL, '4,5', 'Oui', '16Go', 'Or', 'Android', 0, 1, 14, 2),
+(16, 'iPhone 6', 210, 'Très bon', 'Etat irréprochable, Batterie neuve !', NULL, '5', 'Oui', '64Go', 'Gris Sidéral', 'iOS', 0, 1, 3, 1),
+(17, 'iPhone 7', 450, 'Très bon', 'Débloqué acheté à Apple, facture à l\'appuie \r\nComprenant : écouteurs, chargeurs, adaptateur écouteurs, et coque transparente', NULL, '5', 'Oui', '128Go', 'Blanc', 'iOS', 0, 1, 9, 1),
+(18, 'iPhone 6S Plus', 270, 'Très bon', 'Je vends mon iPhone 6s Plus 16 giga car j\'en ai acheté un nouveau. Je n\'en ai plus l\'utilité.\r\nLe téléphone est dans un état irréprochable. Avec sa boîte ses écouteurs et son chargeur. \r\nL\'iPhone n\'est plus garantie Apple , car le téléphone vient de dépasser ses 1 ans.', NULL, '5', 'Oui', '16Go', 'Or', 'iOS', 0, 1, 11, 1),
+(19, 'iPhone 8', 540, 'Neuf', 'IPhone 8 64 gb couleur or debloqué garanti 2 ans sous blister.\r\n\r\nPossibilité de le faire verifier par Apple lors de la transaction (Accepte tout autre démarche de vérification)', NULL, '5', 'Oui', '64Go', 'Or', 'iOS', 0, 1, 13, 1),
+(20, 'iPhone X', 750, 'Très bon', 'Vends iPhone X état neuf, débloque tout opérateur.\r\nChangé en garantie par Apple il y a 2 mois à peine.\r\nIl est vendu avec accessoires et boîte, et certificat de cession.', NULL, '6,4', 'Oui', '64Go', 'Gris Sidéral', 'iOS', 0, 1, 13, 1),
+(21, 'Max Plus M1', 120, 'Très bon', 'vends telephone smartphone dans un état quasi neuf dans sa boîte d\'origine.\r\ndébloqué tout opérateur.', NULL, '4,5', 'Oui', '32Go', 'Or', 'Android', 0, 1, 8, 3),
+(22, '2', 40, 'Hors Service', 'Écran HS.\r\nAppareil photo HS.\r\nDébloqué tout opérateur', NULL, '4,5', 'Oui', '32Go', 'Noir', 'Android', 0, 1, 11, 3),
+(23, 'Selfie', 70, 'Bon', 'Vend mon Asus Zenfone Selfie, très bon état, vitre protégée par film transparent.', NULL, '4,2', 'Oui', '16Go', 'Blanc', 'Android', 0, 1, 2, 3),
+(24, '4 Max', 130, 'Neuf', ' parfait état. Il as servi 1 mois (29/09/2018) et Encore sous garantie Fnac prix magasin (179Euro(s))', NULL, '4,9', 'Oui', '32Go', 'Or', 'Android', 0, 1, 9, 3),
+(25, '5', 270, 'Très bon', 'vente mon Asus ZenFone 5.\r\nle téléphone a 3 mois comme vous verrez sur la facture.', NULL, '6,2', 'Oui', '64Go', 'Noir', 'Android', 0, 1, 11, 3),
+(26, '2', 80, 'Bon', 'Je vends un Asus zenfone en bon état\r\nAttention un câble pour les données mobiles à été sectionné du coup pour aller sur internet cela ne sera possible qu\'avec le wifi.', NULL, '4,5', 'Oui', '32Go', 'Noir', 'Android', 0, 1, 14, 3),
+(27, 'Lumia 640', 70, 'Très bon', 'Etat comme neuf débloqué a tout la mémoire 16go , vendu seule avec la boîte.', NULL, '5', 'Oui', '16Go', 'Bleu', 'Windows Mobile', 0, 1, 12, 4),
+(28, 'C6', 30, 'Bon', 'Nokia C6-00 noir, avec clavier escamotable qwerty. Avec chargeur secteur.\r\nS\'allume et se charge correctement, accès au menu, appareil photo, etc...\r\nIl est SIMLOCKé (affiche \'Carte SIM non valide).', NULL, '3,1', 'Non', '8Go', 'Noir', 'Autre', 0, 2, 2, 4),
+(29, '6700 Slide', 50, 'Très bon', 'Je vends mon Nokia 6700 slide coulissant débloqué tout opérateurs et vendu avec le chargeur.', NULL, '2,6', 'Non', '2Go ou moins', 'Gris', 'Autre', 0, 4, 11, 4),
+(30, '6700s', 50, 'Bon', 'En bon état, débloqué opérateur', NULL, '3 ou moins', 'Non', '2Go ou moins', 'Gris', 'Aucun', 0, 4, 8, 4),
+(31, '6100', 15, 'Médiocre', 'Le boîtier fonctionne. \r\nLe clavier est bien effacé mais un utilisateur qui connaît les touches par coeur saura l\'utiliser. \r\nBloqué Orange. \r\nFourni avec écouteurs (jamais utilisé), chargeur d\'origine fonctionnel, notice et boîte d\'origine ', NULL, '3 ou moins', 'Non', '2Go ou moins', 'Gris', 'Aucun', 0, 5, 9, 4),
+(32, 'Lumia 520', 60, 'Très bon', 'Vends Nokia Lumia 520 bleu en bon état de couleur bleu', NULL, '3,8', 'Non', '8Go', 'Bleu', 'Windows Mobile', 0, 1, 3, 4),
+(33, 'Z30', 100, 'Bon', 'Blackberry Z30 16go Blanc en très bon état débloqué tt opérateur sans aucunes rayures ni chocs . On peut inséré une carte micro SD Ou SDHC jusqu\'à 64go. Une oreillette bluetooth Blackberry est offerte avec.', NULL, '3,2', 'Non', '16Go', 'Blanc', 'Blackberry OS', 0, 1, 13, 5),
+(34, 'Porsche Design P9983', 295, 'Très bon', 'vends blackberry porsche design p\'9983 débloqué tout opérateur clavier azerty vendu avec le chargeur compatible. Produit original Blackberry c\'est pas une contrefaçon', NULL, '3,8', 'Non', '8Go', 'Noir (finition cuir)', 'Blackberry OS', 0, 5, 12, 5),
+(35, 'Q5', 50, 'Très bon', 'Tres bon etat , peu utiliser', NULL, '3,8', 'Non', '8Go', 'Noir', 'Blackberry OS', 0, 5, 11, 5),
+(36, 'Bold 9790', 65, 'Neuf', 'Vends mon BlackBerry Bold 9790 neuf. \r\nJe ne m\'en suis jamais servi, il est donc dans un état irréprochable et fonctionne parfaitement. \r\nFourni dans la boîte d\'origine avec chargeur, câble USB, écouteurs, notices et carte micro SD 8Go. ', NULL, '3,8', 'Non', '8Go', 'Noir', 'Blackberry OS', 0, 5, 1, 5),
+(37, 'Torch 9800', 65, 'Très bon', 'Vends mon blackberry torch 9800 très bon état débloqué tout opérateur vendu avec le chargeur compatible', NULL, '3,8', 'Non', '8Go', 'Noir', 'Blackberry OD', 0, 5, 8, 5),
+(38, 'KeyOne', 250, 'Neuf', 'Blackberry keyone\r\n32go extensible via micro sd\r\nDébloquer\r\nFacture et garantie 11/2019\r\nDans sa boîte avec tous les accessoires\r\nÉtat excellent', NULL, '5', 'Oui', '32Go', 'Noir Mat', 'Android', 0, 1, 11, 5),
+(39, 'Black', 100, 'Très bon', 'Sony xperia Black 64Giga, débloqué et état neuf, WiFi, GPS, applications android...\r\nComplet avec tout ses accessoires\r\nexcellent smartphone.', NULL, '4,6', 'Oui', '64Go', 'Noir', 'Android', 0, 1, 10, 6),
+(40, 'Z5 Compact', 150, 'Bon', 'Sony xperia Z5 compact 4G+ 128Giga (grosse capacité) 23 Mégapixels, débloqué, très bon état juste petite fissures non gênante sur la coque arrière (elle vaut 2,30Euro(s) sur le net). \r\nWiFi, GPS, applications, grand écran, processeur puissant...\r\navec tout ses accessoires.', NULL, '5,5', 'Oui', '128Go', 'Noir', 'Android', 0, 1, 13, 6),
+(41, 'XZ', 120, 'Très bon', 'très bon état il marche très très bien aucun problème , débloquer a tout opérateur ,la mémoire 32 go, vendu seul.', NULL, '5', 'Oui', '32Go', 'argent', 'Android', 0, 1, 8, 6),
+(42, 'Z1 Compact', 90, 'Bon', 'Sony z1 compact débloqué, mieux qu\'un iPhone!\r\nSlot micro SD\r\nProcesseur quadri coeur 2,2ghz\r\n16go de stockage\r\nAppareil photo 20,7 mega pixels...\r\nBatterie neuve\r\nÉcran nickel toujours protégé par une vitre en verre trempé\r\nVendue avec 2 coques\r\nJuste quelques traces sur l\'arrière et les coins', NULL, '5,3', 'Oui', '32Go', 'Noir', 'Android', 0, 1, 9, 6),
+(43, 'M', 45, 'Très bon', 'Sony Xperia M très bon état, fonctionne parfaitement \r\nUtilisé moins d\'un an ', NULL, '4,2', 'Oui', '16Go', 'Noir', 'Android', 0, 1, 3, 6),
+(44, 'Z3 Compact', 80, 'Hors Service', 'Vends smartphone Sony Xperia Z3 compact. \r\nLe connecteur de charge est hs, il ne peut donc pas être chargé.', NULL, '4', 'Oui', '16Go', 'Blanc', 'Android', 0, 1, 12, 6),
+(45, 'Tommy 3', 80, 'Neuf', 'Téléphone Smartphone 5,5 pouces Wiko Tommy 3 NEUF + Facture + Garantie jusqu\'au 10/10/2020 !', NULL, '5,5', 'Oui', '16Go', 'Noir', 'Android', 0, 1, 1, 7),
+(46, 'Rainbow Lite 4G', 50, 'Très bon', 'Double Sim\r\n4G\r\nTient bien la charge\r\nDébloquer\r\nAndroid 5.1.1', NULL, '5,2', 'Oui', '16Go', 'Noir', 'Android', 0, 1, 14, 7),
+(47, 'Wax 4G', 50, 'Bon', 'Fourni avec cable d\'alimentation chargeur, cable écouteur, housse en cuir un peu élimée plus coque du dos en parfait état avec sa batterie d\'origine\r\nCe modèle possède un bon appareil photo pour des prises de vues de bonnes qualité, très pratique pour accéder aux diverses applications\r\n', NULL, '4,8', 'Oui', '8Go', 'Noir', 'Android', 0, 1, 2, 7),
+(48, 'Selfie Originial', 110, '', 'wiko selfi original neuf avec sa boîte et ses accessoires. ', NULL, '4,6', 'Non', '8Go', 'Noir', 'Android', 0, 1, 12, 7),
+(49, 'Goa', 75, 'Neuf', 'vend super wiko goa neuf jamais ouvert. cadeau mais achat en double.', NULL, '5', 'Oui', '16Go', 'Noir', 'Android', 0, 1, 3, 7),
+(50, 'Sunny', 30, 'Très bon', 'Wiko Sunny blanc en bon état vendu avec une coque de protection blanche', NULL, '4,2', 'Non', '8Go', 'Blanc', 'Android', 0, 1, 11, 7),
+(51, 'KM500', 30, 'Bon', 'mobile LG KM500 débloqué. Fournit avec boite et chargeur.', NULL, '3 ou moins', 'Non', '2Go ou moind', 'Gris', 'Autre', 0, 4, 13, 8),
+(52, 'G2', 100, 'Très bon', 'smartphone en très bon état, fonctionne parfaitement.', NULL, '4,6', 'Oui', '16Go', 'Noir', 'Android', 0, 1, 10, 8),
+(53, 'G4 Edition Cuir', 210, 'Très bon', 'LG G4 CUIR CAMEL\r\nDesign unique\r\n32 GO de mémoire, ecran ultra haute définition lumineux 5,5\' bordeless, Photo 16M de pixels. avec HDR auto, mode manuel avec tous les réglages , objectif f: 1.8..selfis 8M de pixels\r\nvendu avec tous les accessoires sur photos + un câble slimport', NULL, '5,5', 'Oui', '32Go', 'Cuir Camel', 'Android', 0, 1, 9, 8),
+(54, '250', 10, 'Bon', 'Bon etat de fonctionnement et esthetique.\r\nDesimlocké tout opérateur.\r\nVendu avec son chargeur.', NULL, '3 ou moins', 'Non', '2Go ou moins', 'Noir', 'Autre', 0, 3, 8, 8),
+(55, 'G3', 70, 'Bon', 'Aucune rayure sur l\'écran et la coque.\r\nProblème de scintillement de temps en temps de l\'écran.', NULL, '4,2', 'Oui', '16Go', 'Noir', 'Android', 0, 1, 3, 8),
+(56, 'G3', 40, 'Hors Service', 'Au bout de quelques minutes le telephone scintille et s\'eteint, je pense a un probleme de carte mere.\r\nSinon il est en tres bon état, pas la moindre rayure, la batterie tient tres bien la charge.\r\nJe le vend donc dans l\'etat, avec une deuxieme housse-coque de protection neuve (photo 2),boite d\'origine, pas de chargeur\r\n', NULL, '4,2', 'Oui', '16Go', 'Noir', 'Android', 0, 1, 11, 8),
+(57, 'Y6 2018', 135, 'Très bon', 'Très bon portable en très bon état, vendu avec sa boîte d\'origine ses écouteurs et son chargeur', NULL, '5,2', 'Oui', '16Go', 'Noir', 'Android', 0, 1, 1, 9),
+(58, 'P20 Pro', 600, 'Très bon', 'Huawei p20 pro en parfait état. Acheter en mi juillet 2018 à Bouygues. Je vend le téléphone avec sa boîte et ses accessoires d\'origines. Aucun problème ni fissures. ', NULL, '6', 'Oui', '64Go', 'Noir', 'Android', 0, 1, 14, 9),
+(59, ' G620S', 65, 'Neuf', 'Vends téléphone Huawei G620S en parfait état, comme neuf, débloqué tout opérateur.\r\nAucune rayure, tel protégé par une coque et écran protégé par un film verre trempé.\r\nAvec boite d\'origine + écouteurs + chargeur avec câble microUSB + coque de protection.', NULL, '5', 'Oui', '32Go', 'Noir', 'Android', 0, 1, 2, 9),
+(60, 'Y7 2018', 110, 'Neuf', 'Acheté en septembre 2018 donc neuf, housse et écran de protection offerts', NULL, '5,5', 'Oui', '16Go', 'Noir', 'Android', 0, 1, 12, 9),
+(61, 'P8 Lite 2018', 115, 'Très bon', 'Désimlocké \r\nSuper état comme neuf aucune rayure \r\nTrès peu servi \r\nToujours utilisé avec protection d\'écran et coque', NULL, '5,2', 'Oui', '16Go', 'Noir', 'Android', 0, 1, 11, 9),
+(63, 'Map 10 Lite', 200, 'Neuf', 'Vend ou échange huawei mate 10lite comme neuf', NULL, '4,8', 'Oui', '16Go', 'Rose', 'Android', 0, 1, 9, 9),
+(64, 'OnePlus 6', 480, 'Neuf', 'Je vends mon Oneplus 6.\r\nEtat neuf.\r\nAcheté début juillet 2018 sur le site Amazon.\r\nColoris \"Mirror Black\".\r\nVersion 8GO de RAM et 128GO de ROM (mémoire).\r\nVendu dans sa boîte complète.', NULL, '6', 'Oui', '128Go', 'Noir Mirroir', 'Android', 0, 1, 13, 10),
+(65, 'OnePlus 5', 250, 'Bon', 'Oneplus 5 64 go bon état. \r\nvendu avec une coque Spigen.', NULL, '5,8', 'Oui', '64Go', 'Noir', 'Android', 0, 1, 11, 10),
+(66, 'Honor 7', 100, 'Bon', 'vend mon honor 7 en assez bonne état car j\'ai changer de telephone. Avec facture', NULL, '5', 'Oui', '32Go', 'Or', 'Android', 0, 1, 14, 10),
+(67, 'Honor 8 lite', 95, 'Très bon', 'SMARTPHONE HONOR 8 Lite couleur blanc, avec une coque à rabat\r\nAcheté le 23.03.2018 (facture)\r\nLe tout en Excellent état , boite et accessoires d\'origine.', NULL, '5,2', 'Oui', '32Go', 'Blanc', 'Android', 0, 1, 13, 10),
+(68, 'Gigaset GS100', 100, 'neuf', 'Téléphone neuf sous blister gagné lors d\'un challenge commercial\r\nGigaset GS100 bleu cobalt 8GB Dual sim (nano-sim, micro-sim) emplacement carte SD', NULL, '5', 'Oui', '8go', 'Bleu Cobalt', 'Android', 0, 1, 3, 10),
+(69, 'Lenovo ZUK Z2', 190, 'Très bon', 'Marque : Lenovo\r\nModèle: ZUK Z2\r\nSystème d\'exploitation:Android 8.0\r\nCPU:Qualcomm Snapdragon 820 64bit Quad Core\r\nGPU:Adreno 530\r\nVitesse du Processeur (max): 2.15GHz\r\nMémoire: ROM 64Go + RAM 4Go', NULL, '5', 'Oui', '64Go', 'Blanc', 'Android', 0, 1, 12, 10),
+(70, 'S8', 330, 'Très bon', 'Toujours protégé vendu avec boîte et accessoires, il est débloqué opérateur.', NULL, '5,1', 'Oui', '32Go', 'Noir', 'Android', 0, 1, 2, 2);
 
 --
 -- Déclencheurs `telephone`
 --
-DROP TRIGGER IF EXISTS `AchatTelephone`;
 DELIMITER $$
 CREATE TRIGGER `AchatTelephone` AFTER DELETE ON `telephone` FOR EACH ROW INSERT INTO offre(idoffre, idprod, libelle, prix, etat, description, photo, tailleecran, connectivite, stockagememoire, couleur, systemexploit, idtype, iduser, idmarque)
 SELECT idoffre, idprod, libelle, prix, etat, description, photo, tailleecran, connectivite, stockagememoire, couleur, systemexploit, idtype, iduser, idmarque
@@ -217,12 +193,10 @@ DELIMITER ;
 -- Structure de la table `typetel`
 --
 
-DROP TABLE IF EXISTS `typetel`;
-CREATE TABLE IF NOT EXISTS `typetel` (
-  `idtype` int(11) NOT NULL AUTO_INCREMENT,
-  `nomtype` varchar(100) NOT NULL,
-  PRIMARY KEY (`idtype`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+CREATE TABLE `typetel` (
+  `idtype` int(11) NOT NULL,
+  `nomtype` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `typetel`
@@ -241,9 +215,8 @@ INSERT INTO `typetel` (`idtype`, `nomtype`) VALUES
 -- Structure de la table `utilisateur`
 --
 
-DROP TABLE IF EXISTS `utilisateur`;
-CREATE TABLE IF NOT EXISTS `utilisateur` (
-  `iduser` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `utilisateur` (
+  `iduser` int(11) NOT NULL,
   `genre` varchar(10) NOT NULL,
   `nom` varchar(50) NOT NULL,
   `prenom` varchar(50) NOT NULL,
@@ -253,10 +226,8 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `datenaissance` date NOT NULL,
   `adresse1` varchar(100) NOT NULL,
   `credit` int(11) NOT NULL,
-  `idville` int(11) NOT NULL,
-  PRIMARY KEY (`iduser`),
-  KEY `Utilisateur_Ville_FK` (`idville`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+  `idville` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `utilisateur`
@@ -281,12 +252,10 @@ INSERT INTO `utilisateur` (`iduser`, `genre`, `nom`, `prenom`, `numero`, `mail`,
 -- Structure de la table `ville`
 --
 
-DROP TABLE IF EXISTS `ville`;
-CREATE TABLE IF NOT EXISTS `ville` (
-  `idville` int(11) NOT NULL AUTO_INCREMENT,
-  `nomville` varchar(100) NOT NULL,
-  PRIMARY KEY (`idville`)
-) ENGINE=InnoDB AUTO_INCREMENT=344 DEFAULT CHARSET=latin1;
+CREATE TABLE `ville` (
+  `idville` int(11) NOT NULL,
+  `nomville` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `ville`
@@ -638,6 +607,101 @@ INSERT INTO `ville` (`idville`, `nomville`) VALUES
 (343, 'Viols-le-Fort (34380)');
 
 --
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `achete`
+--
+ALTER TABLE `achete`
+  ADD PRIMARY KEY (`idprod`,`iduser`),
+  ADD KEY `Achete_Utilisateur0_FK` (`iduser`);
+
+--
+-- Index pour la table `marque`
+--
+ALTER TABLE `marque`
+  ADD PRIMARY KEY (`idmarque`);
+
+--
+-- Index pour la table `offre`
+--
+ALTER TABLE `offre`
+  ADD PRIMARY KEY (`idoffre`),
+  ADD KEY `telephone` (`idprod`),
+  ADD KEY `utilisateur` (`iduser`),
+  ADD KEY `marque` (`idmarque`),
+  ADD KEY `type` (`idtype`);
+
+--
+-- Index pour la table `telephone`
+--
+ALTER TABLE `telephone`
+  ADD PRIMARY KEY (`idprod`),
+  ADD KEY `Telephone_Type_FK` (`idtype`),
+  ADD KEY `Telephone_Utilisateur0_FK` (`iduser`),
+  ADD KEY `Telephone_Marque1_FK` (`idmarque`);
+
+--
+-- Index pour la table `typetel`
+--
+ALTER TABLE `typetel`
+  ADD PRIMARY KEY (`idtype`);
+
+--
+-- Index pour la table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  ADD PRIMARY KEY (`iduser`),
+  ADD KEY `Utilisateur_Ville_FK` (`idville`);
+
+--
+-- Index pour la table `ville`
+--
+ALTER TABLE `ville`
+  ADD PRIMARY KEY (`idville`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `marque`
+--
+ALTER TABLE `marque`
+  MODIFY `idmarque` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT pour la table `offre`
+--
+ALTER TABLE `offre`
+  MODIFY `idoffre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=196;
+
+--
+-- AUTO_INCREMENT pour la table `telephone`
+--
+ALTER TABLE `telephone`
+  MODIFY `idprod` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+
+--
+-- AUTO_INCREMENT pour la table `typetel`
+--
+ALTER TABLE `typetel`
+  MODIFY `idtype` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT pour la table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT pour la table `ville`
+--
+ALTER TABLE `ville`
+  MODIFY `idville` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=344;
+
+--
 -- Contraintes pour les tables déchargées
 --
 
@@ -661,8 +725,3 @@ ALTER TABLE `telephone`
 --
 ALTER TABLE `utilisateur`
   ADD CONSTRAINT `Utilisateur_Ville_FK` FOREIGN KEY (`idville`) REFERENCES `ville` (`idville`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
