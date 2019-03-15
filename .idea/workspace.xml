@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b7856f92-fa9d-4e25-b278-6309a541402b" name="Default Changelist" comment="" />
+    <list default="true" id="b7856f92-fa9d-4e25-b278-6309a541402b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,11 +31,20 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/helper/functions.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
               <caret line="5" column="62" selection-start-line="5" selection-start-column="62" selection-end-line="5" selection-end-column="62" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/editprofil.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
             </state>
           </provider>
         </entry>
@@ -101,7 +112,6 @@
         <option value="$PROJECT_DIR$/marque/searchapple.php" />
         <option value="$PROJECT_DIR$/helper/functionsacheter.php" />
         <option value="$PROJECT_DIR$/css/custom.css" />
-        <option value="$PROJECT_DIR$/client/editprofil.php" />
         <option value="$PROJECT_DIR$/marque/mfunctions.php" />
         <option value="$PROJECT_DIR$/telephone/searchphones.php" />
         <option value="$PROJECT_DIR$/client/profil.php" />
@@ -144,6 +154,7 @@
         <option value="$PROJECT_DIR$/admin/adminaddprofil.php" />
         <option value="$PROJECT_DIR$/marque/apple.php" />
         <option value="$PROJECT_DIR$/helper/functions.php" />
+        <option value="$PROJECT_DIR$/client/editprofil.php" />
       </list>
     </option>
   </component>
@@ -233,6 +244,11 @@
             <path>
               <item name="lebonphone" type="b2602c69:ProjectViewProjectNode" />
               <item name="lebonphone" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lebonphone" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lebonphone" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="lebonphone" type="b2602c69:ProjectViewProjectNode" />
@@ -350,12 +366,12 @@
       <workItem from="1548764968065" duration="787000" />
       <workItem from="1550565636970" duration="1522000" />
       <workItem from="1551705265578" duration="304000" />
-      <workItem from="1551706428911" duration="253000" />
+      <workItem from="1551706428911" duration="571000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="199314000" />
+    <option name="totallyTimeSpent" value="199632000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -436,7 +452,6 @@
     <entry file="file://$PROJECT_DIR$/client/formprofil.php" />
     <entry file="file://$PROJECT_DIR$/telephone/formtelephone.php" />
     <entry file="file://$PROJECT_DIR$/helper/navbar.php" />
-    <entry file="file://$PROJECT_DIR$/client/editprofil.php" />
     <entry file="file://$PROJECT_DIR$/client/updateprofil.php" />
     <entry file="file://$PROJECT_DIR$/client/mescommandes.php" />
     <entry file="file://$PROJECT_DIR$/telephone/deletetelephone.php" />
@@ -463,6 +478,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="62" selection-start-line="5" selection-start-column="62" selection-end-line="5" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/editprofil.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
         </state>
       </provider>
     </entry>
