@@ -80,7 +80,7 @@ include '../helper/navbaradmin.php';
         </div>
         <br><br>
         <div class="col-auto my-1">
-            <button type="submit" class="btn btn-primary">S'enregistrer</button>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
         </div>
     </form>
 </div>

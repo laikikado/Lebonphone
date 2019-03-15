@@ -25,7 +25,7 @@ $id = $_SESSION['iduser'];
     <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="../helper/accueil.php"><img src="../img/logo_lebonphone.png"></a>
+                <a class="navbar-brand" href="../helper/admin.php"><img src="../img/logo_lebonphone.png"></a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">

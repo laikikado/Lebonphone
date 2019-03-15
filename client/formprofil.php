@@ -10,11 +10,10 @@
 
 <body>
 
-<a href="javascript:history.back()">
-    <button type="button" class="btn btn-default btn-circle btn-lg">
-        <i class="glyphicon glyphicon-ok"><-</i>
-    </button>
+<a class="btn btn-group" style="border-color: #56baed; margin-top: 1%; margin-left: 1%" href="javascript:history.back()">
+    <i class="fa fa-home"></i>Retour
 </a>
+
 
 <h2 class="text-center nav-item">Inscription :</h2>
 <div class="badge-center text-center">
@@ -27,7 +26,7 @@
         <div class="form-group form-center">
             <input type="password" class="form-control" name="motdepasse" placeholder="Mot de passe" required>
             <small id="passwordHelpInline" class="text-muted">
-                8 caractères minimum vivement conseillé
+                8 caractères minimums vivement conseillés
             </small>
         </div>
         <br><br><br>
