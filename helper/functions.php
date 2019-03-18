@@ -329,7 +329,7 @@ function updatecredits1($id)
         $stmt = $bdd->prepare($query);
         $stmt->bindParam(':pid', $id);
         $stmt->execute();
-        header('Location: ../helper/accueil.php');
+        header('Location: ../helper/acheter.php');
     }
 }
 
@@ -343,7 +343,7 @@ function updatecredits2($id)
         $stmt = $bdd->prepare($query);
         $stmt->bindParam(':pid', $id);
         $stmt->execute();
-        header('Location: ../helper/accueil.php');
+        header('Location: ../helper/acheter.php');
     }
 }
 
@@ -357,7 +357,7 @@ function updatecredits4($id)
         $stmt = $bdd->prepare($query);
         $stmt->bindParam(':pid', $id);
         $stmt->execute();
-        header('Location: ../helper/accueil.php');
+        header('Location: ../helper/acheter.php');
     }
 }
 
@@ -371,7 +371,7 @@ function updatecredits10($id)
         $stmt = $bdd->prepare($query);
         $stmt->bindParam(':pid', $id);
         $stmt->execute();
-        header('Location: ../helper/accueil.php');
+        header('Location: ../helper/acheter.php');
     }
 }
 
@@ -385,7 +385,7 @@ function updatecredits20($id)
         $stmt = $bdd->prepare($query);
         $stmt->bindParam(':pid', $id);
         $stmt->execute();
-        header('Location: ../helper/accueil.php');
+        header('Location: ../helper/acheter.php');
     }
 }
 
@@ -399,7 +399,7 @@ function updatecredits100($id)
         $stmt = $bdd->prepare($query);
         $stmt->bindParam(':pid', $id);
         $stmt->execute();
-        header('Location: ../helper/accueil.php');
+        header('Location: ../helper/acheter.php');
     }
 }
 

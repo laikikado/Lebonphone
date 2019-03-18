@@ -24,7 +24,8 @@ $ventes = infosoffre($id);
 $count = (int)countachat($id)[0]->count;
 
 for($i=0;$i<$count;$i++)
-{   ?>
+{
+   ?>
 <div class="badge-center" style="margin: 0 auto; width: 600px">
     <div class="badge-modif" style="font-size: 18px!important">
         <div class ="main-container">
