@@ -44,9 +44,18 @@ include "../helper/navbaradmin.php";
                         <li>Système d'exploitation : <?=$adminlistetel[$i]->systemexploit;?></li>
                         <li>Type : <?=$adminlistetel[$i]->nomtype;?></li>
                         <li>Marque : <?=$adminlistetel[$i]->nommarque;?></li>
+                        <li>Statut :
+                            <?php
+                            if ($adminlistetel[$i]->dispo == true){
+                                echo 'Indisponible';
+                            }
+                            else{
+                                echo 'Disponible';
+                            }
+                            ?></li>
                         <form action="../admin/admindeletetelephone.php" method="post">
                             <input type="text" name="idprod" value="<?=$adminlistetel[$i]->idprod;?>" hidden>
-                            <input type="submit" name="Supprimer" class="btn btn-danger" value="Supprimer">
+                            <input type="submit" name="Supprimer" class="btn btn-danger" style="margin-top: 20px" value="Supprimer">
                         </form>
                     </ul>
                 </div>

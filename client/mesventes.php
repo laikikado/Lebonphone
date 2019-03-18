@@ -43,7 +43,7 @@ for($i=0;$i<$count;$i++)
                             <li>Marque : <?=$ventes[$i]->nommarque;?></li>
                             <form action="../telephone/edittelephone.php" method="post">
                                 <input type="text" name="idprod" value="<?=$ventes[$i]->idprod;?>" hidden>
-                                <input type="submit" name="Modifier" class="btn btn-primary" value="Modifier">
+                                <input type="submit" name="Modifier" class="btn btn-primary" style="margin-top: 20px" value="Modifier">
                             </form>
                             <form action="../telephone/deletetelephone.php" method="post">
                                 <input type="text" name="idprod" value="<?=$ventes[$i]->idprod;?>" hidden>
