@@ -87,12 +87,12 @@
                             <h3 class="text"><?=$accueil[$i]->prix;?> <img alt="" src="../img/coin.png"></h3>
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <p>Etat : <br>
+                                    <p>Etat : <?=$accueil[$i]->etat;?><br>
                                     Taille de l'écran : <?=$accueil[$i]->tailleecran;?><br>
                                     4G compatible : <?=$accueil[$i]->connectivite;?><br>
                                     Stockage : <?=$accueil[$i]->stockagememoire;?><br>
                                     Couleur : <?=$accueil[$i]->couleur;?><br>
-                                    OS : <?=$accueil[$i]->systemexploit;?><br>
+                                    OS : <?=$accueil[$i]->systemexploit;?><br><br>
                                     <strong>Statut :
                                         <?php
                                         if ($accueil[$i]->dispo == true){

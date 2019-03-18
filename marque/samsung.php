@@ -33,7 +33,22 @@ include "../helper/navbar.php";
             </div>
             <div class="space-ten"></div>
             <div class="btn-ground text-center">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#product<?=$samsung[$i]->idprod;?>_view"><i class="fa fa-search"></i>En savoir plus</button>
+                <button type="button" class="btn btn-primary" style="margin-bottom: 5px" data-toggle="modal" data-target="#product<?=$samsung[$i]->idprod;?>_view"><i class="fa fa-search"></i>En savoir plus</button>
+                <?php
+                if($samsung[$i]->dispo == true){
+                    echo'<form action="../telephone/achat.php" method="post">
+                        <input name="idprod" value="' . $samsung[$i]->idprod . '" hidden>
+                        <input type="submit" name="achattel" value="Acheter" class="btn btn-danger" disabled="disabled">
+                    </form>';
+                }
+                else
+                {
+                    echo '<form action="../telephone/achat.php" method="post">
+                        <input name="idprod" value="' . $samsung[$i]->idprod . '" hidden>
+                        <input type="submit" name="achattel" value="Acheter" class="btn btn-success">
+                    </form>';
+                }
+                ?>
             </div>
             <div class="space-ten"></div>
         </div>
@@ -64,14 +79,20 @@ include "../helper/navbar.php";
                                         4G compatible : <?=$samsung[$i]->connectivite;?><br>
                                         Stockage : <?=$samsung[$i]->stockagememoire;?><br>
                                         Couleur : <?=$samsung[$i]->couleur;?><br>
-                                        OS : <?=$samsung[$i]->systemexploit;?><br>
+                                        OS : <?=$samsung[$i]->systemexploit;?><br><br>
+                                        <strong>Statut :
+                                            <?php
+                                            if ($samsung[$i]->dispo == true){
+                                                echo 'Indisponible';
+                                            }
+                                            else{
+                                                echo 'Disponible';
+                                            }
+                                            ?></strong>
                                     </p>
                                 </div>
                             </div>
                             <div class="space-ten"></div>
-                            <div class="btn-ground">
-                                <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart"></span> Acheter</button>
-                            </div>
                         </div>
                     </div>
                 </div>

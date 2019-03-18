@@ -96,7 +96,7 @@ for($i=0;$i<$countprod;$i++){ ?>
                                         4G compatible : <?=$rechercheprod[$i]->connectivite;?><br>
                                         Stockage : <?=$rechercheprod[$i]->stockagememoire;?><br>
                                         Couleur : <?=$rechercheprod[$i]->couleur;?><br>
-                                        OS : <?=$rechercheprod[$i]->systemexploit;?><br>
+                                        OS : <?=$rechercheprod[$i]->systemexploit;?><br><br>
                                         <strong>Statut :
                                             <?php
                                             if ($rechercheprod[$i]->dispo == true){

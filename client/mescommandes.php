@@ -37,7 +37,7 @@ for($i=0;$i<$count;$i++)
                         <li>Mail du vendeur : <?=$ventes[$i]->mail;?></li>
                         <form action="../telephone/deleteachat.php" method="post">
                             <input type="text" name="idprod" value="<?=$ventes[$i]->idprod;?>" hidden>
-                            <input type="submit" name="annuler" class="btn btn-danger" value="Annuler l'offre">
+                            <input type="submit" name="annuler" style="margin-top: 10px" class="btn btn-danger" value="Annuler l'offre">
                         </form>
                     </ul>
                 </div>
