@@ -48,21 +48,22 @@
             </div>
             <div class="space-ten"></div>
             <div class="btn-ground text-center">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#product<?=$accueil[$i]->idprod;?>_view"><i class="fa fa-search"></i>En savoir plus</button>
+                <button type="button" class="btn btn-primary" style="margin-bottom: 5px" data-toggle="modal" data-target="#product<?=$accueil[$i]->idprod;?>_view"><i class="fa fa-search"></i>En savoir plus</button>
                 <?php
                 if($accueil[$i]->dispo == true){
-
+                    echo'<form action="../telephone/achat.php" method="post">
+                        <input name="idprod" value="' . $accueil[$i]->idprod . '" hidden>
+                        <input type="submit" name="achattel" value="Acheter" class="btn btn-danger" disabled="disabled">
+                    </form>';
                 }
                 else
                     {
                 echo '<form action="../telephone/achat.php" method="post">
                         <input name="idprod" value="' . $accueil[$i]->idprod . '" hidden>
-                        <input type="submit" name="achattel" value="Acheter" class="btn btn-primary">
+                        <input type="submit" name="achattel" value="Acheter" class="btn btn-success">
                     </form>';
-
                     }
                 ?>
-
             </div>
             <div class="space-ten"></div>
         </div>
@@ -92,15 +93,15 @@
                                     Stockage : <?=$accueil[$i]->stockagememoire;?><br>
                                     Couleur : <?=$accueil[$i]->couleur;?><br>
                                     OS : <?=$accueil[$i]->systemexploit;?><br>
-                                    Statut :
+                                    <strong>Statut :
                                         <?php
                                         if ($accueil[$i]->dispo == true){
-                                            echo 'Non disponible';
+                                            echo 'Indisponible';
                                         }
                                         else{
                                             echo 'Disponible';
                                         }
-                                        ?>
+                                        ?></strong>
                                     </p>
                                 </div>
                             </div>
