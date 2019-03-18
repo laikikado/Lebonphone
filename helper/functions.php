@@ -98,6 +98,23 @@ function admininfosphone(){
     return $phone;
 }
 
+function admininfosachat()
+{
+    $bdd = null;
+
+    if ($bdd == null) {
+        $bdd = getDataBase();
+    }
+    if ($bdd) {
+        $stmt = $bdd->prepare("SELECT * FROM utilisateur U, achete A WHERE U.iduser = A.iduser");
+        if ($stmt->execute()) {
+            $user = $stmt->fetchAll(PDO::FETCH_OBJ);
+            $stmt->closeCursor();
+        }
+    }
+    return $user;
+}
+
 function infosPhoneacc(){
     $bdd = null;
 
@@ -168,6 +185,16 @@ function admincountprofil(){
 
     $bdd = getDataBase();
     $stmt = $bdd->prepare("SELECT COUNT(*) as count FROM utilisateur U, ville V WHERE U.idville = V.idville");
+    $stmt->execute();
+    $count = $stmt->fetchAll(PDO::FETCH_OBJ);
+    $stmt->closeCursor();
+    return $count;
+}
+
+function admincountachat(){
+
+    $bdd = getDataBase();
+    $stmt = $bdd->prepare("SELECT COUNT(*) as count FROM utilisateur U, achete A WHERE U.iduser = A.iduser");
     $stmt->execute();
     $count = $stmt->fetchAll(PDO::FETCH_OBJ);
     $stmt->closeCursor();

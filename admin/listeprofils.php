@@ -40,7 +40,7 @@ include '../helper/navbaradmin.php';
                         <li>Ville : <?=$adminlisteprofil[$i]->nomville;?></li>
                         <form action="../admin/admindeleteprofil.php" method="post">
                             <input type="text" name="iduser" value="<?=$adminlisteprofil[$i]->iduser;?>" hidden>
-                            <input type="submit" name="Supprimer" class="btn btn-danger" value="Supprimer">
+                            <input type="submit" name="Supprimer" class="btn btn-danger" style="margin-top: 20px" value="Supprimer">
                         </form>
                     </ul>
                 </div>
