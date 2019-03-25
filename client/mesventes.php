@@ -18,6 +18,7 @@
 
     returnUtilisateur($id);
     $ventes = infosPhone($id);
+    $acheteur = infosacheteur($id);
 
 $count = (int)countprod($id)[0]->count;
 
@@ -41,14 +42,42 @@ for($i=0;$i<$count;$i++)
                             <li>Système d'exploitation : <?=$ventes[$i]->systemexploit;?></li>
                             <li>Type : <?=$ventes[$i]->nomtype;?></li>
                             <li>Marque : <?=$ventes[$i]->nommarque;?></li>
-                            <form action="../telephone/edittelephone.php" method="post">
+                            <?php if($ventes[$i]->dispo == false){?>
+                                <form action="../telephone/edittelephone.php" method="post">
                                 <input type="text" name="idprod" value="<?=$ventes[$i]->idprod;?>" hidden>
                                 <input type="submit" name="Modifier" class="btn btn-primary" style="margin-top: 20px" value="Modifier">
                             </form>
                             <form action="../telephone/deletetelephone.php" method="post">
                                 <input type="text" name="idprod" value="<?=$ventes[$i]->idprod;?>" hidden>
                                 <input type="submit" name="supprimer" class="btn btn-danger" value="Supprimer">
-                            </form>
+                            </form><?php
+                            }
+                            else{
+                                $acheteur = infosacheteurventes($ventes[$i]->idprod);
+                                if ($acheteur != null) {
+                                    ?>
+                                    <ul>
+                                        <li>Nom de l'acheteur: <?= $acheteur->nom; ?></li>
+                                        <li>Prénom de l'acheteur : <?= $acheteur->prenom; ?></li>
+                                        <li>Mail de l'acheteur : <?= $acheteur->mail; ?></li>
+                                        <li>Numéro de l'acheteur : <?= $acheteur->numero; ?></li>
+                                    </ul><br><br><br><br>
+                                    <?php if($ventes[$i]->vendu == true){
+                                        echo 'Le téléphone a été vendu !';
+                                    }
+                                    else{
+                                        ?>
+
+                                    <form action="../client/updatevendu.php" method="post">
+                                        <input type="text" name="idprod" value="<?=$ventes[$i]->idprod;?>" hidden>
+                                        <input type="submit" name="valider" class="btn btn-success" style="margin-top: 20px" value="Valider la vente">
+                                    </form>
+                                    <?php
+                                    }
+                                }
+                            }
+                            ?>
+
                         </ul>
                     </div>
                 </div>

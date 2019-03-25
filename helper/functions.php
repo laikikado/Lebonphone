@@ -47,15 +47,15 @@ function infosPhone($id){
     return $phone;
 }
 
-function infosoffre($id){
+function infosacheteur($id){
     $bdd = null;
 
     if ($bdd == null) {
         $bdd = getDataBase();
     }
     if ($bdd) {
-        $stmt = $bdd->prepare("SELECT * FROM telephone t, typetel ty, marque ma, utilisateur u, achete a 
-WHERE u.iduser = :pid AND a.iduser = u.iduser AND t.idprod = a.idprod AND ma.idmarque = t.idmarque AND ty.idtype = t.idtype");
+        $stmt = $bdd->prepare("SELECT * FROM utilisateur u, achete a, marque m, typetel ty, telephone t 
+WHERE u.iduser = a.iduser AND ty.idtype = t.idtype AND m.idmarque = t.idmarque AND t.idprod = a.idprod AND u.iduser = :pid");
         $stmt->bindParam(':pid', $id);
         if ($stmt->execute()) {
             $phone = $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -65,6 +65,26 @@ WHERE u.iduser = :pid AND a.iduser = u.iduser AND t.idprod = a.idprod AND ma.idm
     return $phone;
 }
 
+function infosacheteurventes($idprod){
+    $bdd = null;
+
+    if ($bdd == null) {
+        $bdd = getDataBase();
+        $bdd = getDataBase();
+    }
+
+    $user = null;
+    if ($bdd) {
+        $stmt = $bdd->prepare("SELECT * FROM utilisateur u, achete a 
+WHERE u.iduser = a.iduser AND a.idprod = :pid");
+        $stmt->bindParam(':pid', $idprod);
+        if ($stmt->execute()) {
+            $user = $stmt->fetch(PDO::FETCH_OBJ);
+            $stmt->closeCursor();
+        }
+    }
+    return $user;
+}
 function admininfosuser()
 {
     $bdd = null;
@@ -122,7 +142,7 @@ function infosPhoneacc(){
         $bdd = getDataBase();
     }
     if ($bdd) {
-        $stmt = $bdd->prepare("SELECT * FROM telephone t, typetel ty, marque ma, utilisateur u WHERE t.idtype = ty.idtype AND t.idmarque = ma.idmarque AND t.iduser = u.iduser ORDER BY idprod DESC");
+        $stmt = $bdd->prepare("SELECT * FROM telephone t, typetel ty, marque ma, utilisateur u WHERE t.idtype = ty.idtype AND t.idmarque = ma.idmarque AND t.iduser = u.iduser AND t.vendu = 0 ORDER BY idprod DESC");
         if ($stmt->execute()) {
             $phone = $stmt->fetchAll(PDO::FETCH_OBJ);
             $stmt->closeCursor();
@@ -343,6 +363,20 @@ function updateProfil()
         $stmt->bindParam(':idville', $idville);
         $stmt->execute();
         header('Location: profil.php');
+    }
+}
+
+function updateVendu($id)
+{
+    if (isset($_POST['idprod'])) {
+
+        extract(array_map("htmlspecialchars", $_POST));
+        $query = "UPDATE telephone SET vendu = 1 WHERE idprod = :pid";
+        $bdd = getDatabase();
+        $stmt = $bdd->prepare($query);
+        $stmt->bindParam(':pid', $id);
+        $stmt->execute();
+        header('Location: mesventes.php');
     }
 }
 

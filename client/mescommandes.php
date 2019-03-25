@@ -19,7 +19,7 @@
 <?php
 
 returnUtilisateur($id);
-$ventes = infosoffre($id);
+$ventes = infosacheteur($id);
 
 $count = (int)countachat($id)[0]->count;
 
@@ -36,10 +36,18 @@ for($i=0;$i<$count;$i++)
                         <li>Prix : <?=$ventes[$i]->prix;?></li>
                         <li>Numéro du vendeur : +33<?=$ventes[$i]->numero;?></li>
                         <li>Mail du vendeur : <?=$ventes[$i]->mail;?></li>
-                        <form action="../telephone/deleteachat.php" method="post">
-                            <input type="text" name="idprod" value="<?=$ventes[$i]->idprod;?>" hidden>
-                            <input type="submit" name="annuler" style="margin-top: 10px" class="btn btn-danger" value="Annuler l'offre">
-                        </form>
+                        <?php if($ventes[$i]->vendu == true){
+                            echo 'Le vendeur a validé la transaction !';
+                        }
+                        else { ?>
+                            <form action="../telephone/deleteachat.php" method="post">
+                                <input type="text" name="idprod" value="<?= $ventes[$i]->idprod; ?>" hidden>
+                                <input type="submit" name="annuler" style="margin-top: 10px" class="btn btn-danger"
+                                       value="Annuler l'offre">
+                            </form>
+                            <?php
+                        }
+                        ?>
                     </ul>
                 </div>
             </div>
