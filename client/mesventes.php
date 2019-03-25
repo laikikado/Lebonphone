@@ -56,14 +56,13 @@ for($i=0;$i<$count;$i++)
                                 $acheteur = infosacheteurventes($ventes[$i]->idprod);
                                 if ($acheteur != null) {
                                     ?>
-                                    <ul>
-                                        <li>Nom de l'acheteur: <?= $acheteur->nom; ?></li>
-                                        <li>Prénom de l'acheteur : <?= $acheteur->prenom; ?></li>
-                                        <li>Mail de l'acheteur : <?= $acheteur->mail; ?></li>
-                                        <li>Numéro de l'acheteur : <?= $acheteur->numero; ?></li>
-                                    </ul><br><br><br><br>
+                                    <br><p style="font-weight: bolder">Acheteur :</p>
+                                        <li>Identité : <i style="text-transform: uppercase;"><?= $acheteur->nom; ?></i> <?= $acheteur->prenom; ?></li>
+                                        <li>Mail : <?= $acheteur->mail; ?></li>
+                                        <li>Téléphone : 0<?= $acheteur->numero; ?></li>
+
                                     <?php if($ventes[$i]->vendu == true){
-                                        echo 'Le téléphone a été vendu !';
+                                        echo '<br><p style="font-weight: bolder">Le téléphone a été vendu !</p>';
                                     }
                                     else{
                                         ?>

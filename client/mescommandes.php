@@ -34,10 +34,10 @@ for($i=0;$i<$count;$i++)
                 <div class="row">
                     <ul>
                         <li>Prix : <?=$ventes[$i]->prix;?></li>
-                        <li>Numéro du vendeur : +33<?=$ventes[$i]->numero;?></li>
+                        <li>Téléphone du vendeur : 0<?=$ventes[$i]->numero;?></li>
                         <li>Mail du vendeur : <?=$ventes[$i]->mail;?></li>
                         <?php if($ventes[$i]->vendu == true){
-                            echo 'Le vendeur a validé la transaction !';
+                            echo '<br><p style="font-weight: bolder">Le vendeur a validé la transaction !</p>';
                         }
                         else { ?>
                             <form action="../telephone/deleteachat.php" method="post">
